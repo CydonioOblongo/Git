@@ -1,1 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8">
+        <title>TSF</title>
+        <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,700" rel="stylesheet">
+        <style>
+            html, body, div, span, applet, object, iframe,
+            h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+            a, abbr, acronym, address, big, cite, code,
+            del, dfn, em, img, ins, kbd, q, s, samp,
+            small, strike, strong, sub, sup, tt, var,
+            b, u, i, center,
+            dl, dt, dd, ol, ul, li,
+            fieldset, form, label, legend,
+            table, caption, tbody, tfoot, thead, tr, th, td,
+            article, aside, canvas, details, embed, 
+            figure, figcaption, footer, header, hgroup, 
+            menu, nav, output, ruby, section, summary,
+            time, mark, audio, video {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                font-size: 100%;
+                font: inherit;
+                vertical-align: baseline;
+            }
+            /* HTML5 display-role reset for older browsers */
+            article, aside, details, figcaption, figure, 
+            footer, header, hgroup, menu, nav, section {
+                display: block;
+            }
+            body {
+                line-height: 1;
+            }
+            ol, ul {
+                list-style: none;
+            }
+            blockquote, q {
+                quotes: none;
+            }
+            blockquote:before, blockquote:after,
+            q:before, q:after {
+                content: '';
+                content: none;
+            }
+            table {
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+            /*end of reset*/
 
+            html {
+                font-size: 62.5%;
+            }
+            body {
+                background-color: #EEE;
+                font-family: Arial, sans-serif;
+            }
+            a {
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            #wrapper {
+                width: 980px;
+                margin: 0 auto;
+                background-color: #FFF;
+                padding: 0 12px;
+            }
+            header {
+                height: 185px;
+                /*outline: 1px solid red;*/  
+            }
+            header .top {
+                height: 106px;
+                padding-top: 20px;  
+            }
+            header .top .logo {
+                width: 137px;
+                float: left;
+                padding-left: 36px;
+                margin-right: 22px;
+            }
+            header .top .featured {
+                width: 785px; /*980px de largura total menos o tamanho do logo, retirei o padding do logo bem como a margem*/ 
+                float: left;
+            }
+            header .top .featured li {
+                width: 136px;      /*fui ver o tamanho da imagem*/
+                float: left;
+                text-align: center;
+                margin-left: 18px; 
+            }
+            header .top .featured li a {
+                color: #333;
+                font-size: 1.1em;
+            }
+            nav ul{
+                height: 27px;   
+            }
+            nav ul li {
+                height: 27px;
+                line-height: 27px;
+                display: inline-block;
+                background-color: #e6e6e6;
+                border-radius: 4px 4px 0 0;   
+            }
+            nav ul li a {
+                color: #004060;
+                font-weight: bold;
+                font-size: 1.2em;
+                display: block;
+                padding: 0 10px; 
+            }
+            nav ul li:hover a, nav ul .selected a {
+                color: #FFF;
+                text-decoration: none;
+            }
+            nav ul li:hover, nav ul .selected {
+                background-color: #004060;        
+            }
+            .bottom {
+                /*outline: 1px solid red;*/
+                height: 32px;
+                background-color: #004060;
+                border-radius: 0 4px 4px 4px;          
+            }
+            .bottom li {
+                float: left;
+                line-height: 32px;
+                padding-left: 10px;       
+            }
+            .bottom ul li a {
+                color: #FFF;
+                font-size: 1.2em;    
+            }
+            .bottom ul li:nth-child(5)::before, .bottom ul li:nth-child(4)::before, .bottom ul li:nth-child(3)::before, .bottom ul li:nth-child(2)::before {
+                color: #54798b;
+                content: "|";
+                padding-right: 11px;    
+            }
+            .bottom ul li:last-child::before {
+                color: #54798b;
+                content: "|";
+                padding-right: 11px;
+            }
+            .search {
+               /*outline: 1px solid black;*/
+               float: left;
+               margin-top: 5px;
+               margin-left: 350px;              
+            }
+            .search input {
+                width: 140px;
+                border-radius: 2px;
+                border: 0px solid;
+                font-size: 1.1em;
+                height: 17px;
+            }
+            .newsletter {
+                /*outline: 1px solid blue;*/
+                float: right;
+                line-height: 32px;
+                margin-right: 15px;
+            }
+            .newsletter::before {
+                content: "|";
+                padding-right: 5px;
+                color: #54798b;
+            }
+            .newsletter a {
+                color: #FFF;
+                font-size: 1.2em;
+                text-decoration: none;    
+            }
+            .newsletter a img {
+                margin-left: 5px;
+                position: relative;
+                top: 5px;
+                left: 0;
+            }
+            .nav_bottom {
+                /*outline: 1px solid blue;*/
+                background-color: #FFF; 
+                clear: left;
+                height: 30px;                          
+            }
+            .nav_bottom ul {
+                font-size: 11px;
+                font-weight: bold;   
+            }
+            .nav_bottom li {
+                /*outline: 1px solid red;*/
+                float: left;
+                margin-left: 6px;
+                line-height: 30px;
+            }
+            .nav_bottom li a {
+                color: #6699cc;
+                font-weight: bold;    
+            }
+            .nav_bottom li a img {
+                margin-left: 6px; 
+            }
+            .login {
+                float: right;;
+                margin-right: 0;
+            }
+            .login a {
+                color: #6699cc;
+                font-weight: bold;
+                line-height: 30px;
+            }
+            .banner {
+                width: 100%;
+                background-color: #2a2a2a;
+                margin-bottom: 10px;                
+            }
+
+            .banner_content {
+                max-width: 980px;
+                /*outline: 1px solid red;*/
+                margin: 0 auto;
+                position: relative;
+                z-index: 999;                 
+            }
+
+            .banner p {
+                position: absolute;
+                right: 0;
+                top: 15px;
+                margin-right: 8px;
+                /*outline: 1px solid blue;*/   
+            }
+
+            .banner p a {
+                /*outline: 1px solid yellow;*/
+                font-family: "Titillium Web", sans-serif;
+                font-weight: bold;
+                color: #cacaca;
+                text-transform: uppercase;
+                font-size: 12px;
+                text-decoration: none;
+                padding: 10px 20px 10px 20px;
+                transition: 1s;       
+            }
+
+            .banner p a:hover {
+                background-color: #000;
+            }
+            .banner_display {
+                outline: 1px solid green;
+                width: 100%;
+                display: none;
+                font-size: 0;
+                background-color: #000;
+            }
+            .banner_display ul {
+                width: 980px;
+                margin: 0 auto;
+            }
+            .banner_display li {
+                display: inline-block;
+                width: 122px;
+                /*outline: 1px solid pink;*/                                              
+            }
+            .banner_display li a {
+                opacity: 0.6;          
+            }
+            .banner_display li a:hover {
+                /*transition: opacity 2s;*/
+                outline: 1px solid pink;
+            }
+            .banner_display ul li:first-child {
+                border-bottom: 0.5px solid #2b2b2b;
+            }
+            .banner_display ul li:nth-child(2), .banner_display ul li:nth-child(3), .banner_display ul li:nth-child(4), .banner_display ul li:nth-child(5), .banner_display ul li:nth-child(6), .banner_display ul li:nth-child(7), .banner_display ul li:nth-child(8)  {
+                border-bottom: 0.5px solid #2b2b2b;
+                border-left: 0.5px solid #2b2b2b;
+                margin-top: 30px;
+            } 
+            .banner_display ul li:nth-child(9), .banner_display ul li:nth-child(10), .banner_display ul li:nth-child(11), .banner_display ul li:nth-child(12), .banner_display ul li:nth-child(13), .banner_display ul li:nth-child(14), .banner_display ul li:nth-child(15) {
+                border-right: 0.5px solid #2b2b2b;
+                margin-bottom: 30px;
+            }
+            
+            /*.banner_content:hover + .banner_display, .banner_display:hover {
+                display: block;
+                transition: 2s ease-out;  
+            }*/
+
+            .banner_content a:hover .banner_display, .banner_display:hover  {
+                display: block;
+            }
+
+
+
+
+        </style>
+    </head>
+    <body>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="banner">
+            <div class="banner_content">
+                <img src="../Imagens/gmg-rh-logo-globalmediagrp.png" alt="">
+                <p><a href="">Sites do grupo</a></p>
+            </div>
+            <div class="banner_display">
+                <ul>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-dn.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-ojogo.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-vm.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-dv.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-ntv.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-ao.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-dnm.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-ocasiao.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-jn.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-tsf.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-ev.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-nm.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-rj.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-jf.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-gimagens.png" alt=""></a></li>
+                    <li><a href=""><img src="../Imagens/gmg-rh-brand-jf.png" alt=""></a></li>                    
+                </ul>   
+            </div>
+        </div>
+        <div id="wrapper">
+            <header>
+                <div class="top">
+                    <div class="logo">
+                            <a href="">
+                                <img src="../Imagens/logo_tsf.jpg" alt="homepage">
+                            </a>
+                    </div>
+                    <ul class="featured">
+                        <li></li>
+                        <li>
+                            <a href="">
+                                <img src="../Imagens/ng2389470.jpg" alt="">
+                                Fórum TSF
+                            </a> 
+                        </li>    
+                        <li>
+                            <a href="">
+                                <img src="../Imagens/ng3570677.jpg" alt="">
+                                Negócios em Portugês
+                            </a>
+                        </li>   
+                        <li>
+                            <a href="">
+                                <img src="../Imagens/ng2837870.jpg" alt="">
+                                Zona Pop
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="../Imagens/ng2220510.jpg" alt="">
+                                Mundo Digital
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="../Imagens/ng1025840.jpg" alt="">
+                                A Playlist de...
+                            </a>
+                        </li>        
+                    </ul>
+                </div>
+                <nav>
+                    <ul>
+                        <li class="selected"><a href="">Actualidade</a></li>
+                        <li><a href="">Programas</a></li>
+                        <li><a href="">Multimédia</a></li>
+                        <li><a href="">Blogues</a></li>
+                        <li><a href="">Futebol</a></li>
+                        <li><a href="">Bolsa</a></li>
+                        <li><a href="">Trânsito</a></li>
+                        <li><a href="">Totojogos</a></li>
+                        <li><a href="">Meteorologia</a></li>
+                        <li><a href="">Marés</a></li>
+                        <li><a href="">Framácias</a></li>
+                        <li><a href="">Agenda</a></li>
+                        <li><a href="">Jogos</a></li>
+                    </ul>
+                </nav>
+                <div class="bottom">
+                    <ul>
+                        <li><a href="">Portugal</a></li>
+                        <li><a href="">Internacional</a></li>
+                        <li><a href="">Economia</a></li>
+                        <li><a href="">Desporto</a></li>
+                        <li><a href="">Vida</a></li>
+                    </ul>
+                    <div class="search">
+                        <form method="get" action="search.php">
+                            <input type="search" name="search" placeholder="pesquisar">
+                            <button type="submit" name="submit">
+                                <img src="../Imagens/lupa.gif" alt="pesquisar">
+                            </button>
+                        </form>
+                    </div>
+                    <div class="newsletter">
+                            <a href="">Newsletter<img src="../Imagens/icone_newsletter_tsf.png" alt=""></a>
+                    </div>
+                </div>                
+            </header>
+            <div class="nav_bottom">
+                <ul>
+                    <li><a href="">Em Directo<img src="../Imagens/tsfdirecto.gif" alt=""></a></li>
+                    <li><a href="">Noticiário das 12h00<img src="../Imagens/micro.gif" alt=""></a></li>
+                    <li><a href="">Fórum TSF<img src="../Imagens/forum.gif" alt=""></a></li>
+                    <li><a href="">Podcast<img src="../Imagens/podcast.gif" alt=""></a></li>
+                    <li><a href="">RSS<img src="../Imagens/rss.gif" alt=""></a></li>
+                    <li><a href="">FM<img src="../Imagens/fm.gif" alt=""></a></li>
+                    <li><a href="">MOBILE<img src="../Imagens/pda.gif" alt=""></a></li>
+                    <li><a href="">SMS<img src="../Imagens/sms.gif" alt=""></a></li>
+                    <li><a href="">Fale connosco<img src="../Imagens/contactos.gif" alt=""></a></li>
+                </ul>
+                <div class="login">
+                    <img src="../Imagens/login_key.gif" alt="">
+                        <a href="">login/registo</a>
+                </div>
+            </div>
+            <main>
+
+            </main>
+            <div id="sidebar">
+
+            </div>
+            <footer>
+
+            </footer>
+        </div>
+    </body>
+</html>
